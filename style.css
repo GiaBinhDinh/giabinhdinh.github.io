@@ -1,0 +1,266 @@
+/* =========================================
+   1. THEME VARIABLES (Light & Dark Mode)
+   ========================================= */
+:root {
+    /* LIGHT MODE (Default) - Clean, Executive, Trustworthy */
+    --bg-main: #f8fafc;        /* Very light slate/off-white */
+    --bg-card: #ffffff;        /* Pure white for content boxes */
+    --bg-nav: rgba(255, 255, 255, 0.95);
+    
+    --text-main: #475569;      /* Slate gray for high readability */
+    --text-heading: #0f172a;   /* Very dark slate for headings */
+    
+    --accent: #059669;         /* Professional Emerald Green */
+    --accent-hover: #047857;
+    --accent-fade: rgba(5, 150, 105, 0.1);
+    
+    --border-color: #e2e8f0;   /* Soft gray borders */
+    
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+    /* DARK MODE - Deep, Sophisticated, High-End */
+    --bg-main: #0b1120;        /* Deep midnight slate */
+    --bg-card: #141e33;        /* Slightly lighter slate for cards */
+    --bg-nav: rgba(11, 17, 32, 0.95);
+    
+    --text-main: #94a3b8;      /* Light slate gray for reading */
+    --text-heading: #f8fafc;   /* Crisp white for headings */
+    
+    --accent: #10b981;         /* Vibrant Emerald to pop on dark bg */
+    --accent-hover: #34d399;
+    --accent-fade: rgba(16, 185, 129, 0.1);
+    
+    --border-color: #1e293b;   /* Dark slate borders */
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================
+   2. BASE STYLES & TRANSITIONS
+   ========================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    /* This transition makes the light/dark switch smooth! */
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3, h4 { 
+    font-family: var(--font-heading); 
+    color: var(--text-heading); 
+    transition: color 0.4s ease;
+}
+
+/* =========================================
+   3. NAVIGATION
+   ========================================= */
+.navbar {
+    position: fixed;
+    top: 0; width: 100%;
+    background: var(--bg-nav);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.logo { 
+    font-family: var(--font-heading); 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: var(--text-heading); 
+}
+
+.nav-links a, .toggle-btn {
+    margin-left: 2rem;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 1.1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, .toggle-btn:hover { 
+    color: var(--accent); 
+}
+
+#scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    width: 0%; height: 3px;
+    background: var(--accent);
+    z-index: 1001;
+}
+
+/* =========================================
+   4. LAYOUT UTILITIES
+   ========================================= */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section { padding: 6rem 0; }
+.content-box {
+    background: var(--bg-card);
+    padding: 3rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-soft);
+    transition: all 0.4s ease;
+}
+
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-title { 
+    font-size: 2.5rem; 
+    position: relative; 
+    display: inline-block; 
+    padding-bottom: 15px; 
+    margin-bottom: 2rem;
+}
+.section-title::after {
+    content: ''; position: absolute; bottom: 0; left: 50%; 
+    transform: translateX(-50%);
+    width: 60px; height: 3px; background-color: var(--accent);
+}
+
+/* =========================================
+   5. BUTTONS
+   ========================================= */
+.btn {
+    display: inline-block; padding: 0.8rem 2rem;
+    border-radius: 6px; text-decoration: none; font-weight: 500;
+    transition: all 0.3s ease; cursor: pointer;
+}
+.primary-btn { 
+    background: var(--accent); color: white; border: 1px solid var(--accent); 
+}
+.primary-btn:hover { 
+    background: var(--accent-hover); 
+    box-shadow: 0 10px 20px var(--accent-fade); 
+    transform: translateY(-2px);
+}
+.secondary-btn { 
+    background: transparent; color: var(--text-heading); border: 1px solid var(--border-color); margin-left: 1rem; 
+}
+.secondary-btn:hover { 
+    border-color: var(--accent); color: var(--accent); transform: translateY(-2px);
+}
+
+/* =========================================
+   6. HERO SECTION
+   ========================================= */
+.hero {
+    padding-top: 10rem; padding-bottom: 6rem;
+    display: flex; align-items: center; gap: 4rem;
+}
+.hero-text { flex: 1; }
+.hero-text h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1rem; }
+.subtitle { font-size: 1.25rem; color: var(--accent); margin-bottom: 2rem; font-weight: 500; min-height: 30px; }
+
+.hero-image-wrapper { flex: 1; display: flex; justify-content: center; position: relative; }
+.profile-img {
+    width: 100%; max-width: 400px; border-radius: 12px;
+    box-shadow: var(--shadow-soft); position: relative; z-index: 2;
+}
+
+/* =========================================
+   7. GRIDS & CARDS (Ventures / Expertise)
+   ========================================= */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.card {
+    background: var(--bg-card);
+    padding: 2.5rem; border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: var(--shadow-soft); 
+    border-color: var(--accent); 
+}
+.card-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
+.card-title { font-size: 1.25rem; margin-bottom: 1rem; color: var(--text-heading); }
+.card-text { color: var(--text-main); font-size: 0.95rem; }
+
+/* =========================================
+   8. TIMELINE
+   ========================================= */
+.timeline { position: relative; max-width: 800px; margin: 0 auto; }
+.timeline::before {
+    content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 2px; background: var(--border-color); transform: translateX(-50%);
+}
+.timeline-item { margin-bottom: 3rem; position: relative; width: 50%; padding-right: 3rem; }
+.timeline-item:nth-child(even) { left: 50%; padding-left: 3rem; padding-right: 0; }
+
+.timeline-dot {
+    position: absolute; right: -8px; top: 0;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent); border: 4px solid var(--bg-main);
+    transition: border-color 0.4s ease;
+}
+.timeline-item:nth-child(even) .timeline-dot { left: -8px; }
+
+.timeline-content { 
+    background: var(--bg-card); padding: 2rem; 
+    border-radius: 12px; border: 1px solid var(--border-color);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+.time-badge { 
+    display: inline-block; padding: 0.3rem 0.8rem; 
+    background: var(--accent-fade); color: var(--accent); 
+    font-size: 0.85rem; font-weight: 600; border-radius: 4px; margin-bottom: 1rem; 
+}
+.timeline-title { font-size: 1.2rem; margin-bottom: 0.5rem; }
+
+/* =========================================
+   9. FOOTER
+   ========================================= */
+.footer { 
+    background: var(--bg-card); border-top: 1px solid var(--border-color);
+    padding: 4rem 0 2rem; text-align: center; margin-top: 4rem;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+.footer-logo { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-heading); }
+.social-links { margin-bottom: 1.5rem; }
+.social-links a { color: var(--text-main); font-size: 1.5rem; margin: 0 10px; transition: color 0.3s; }
+.social-links a:hover { color: var(--accent); }
+
+/* =========================================
+   10. ANIMATIONS & RESPONSIVE
+   ========================================= */
+.ambient-shape {
+    position: fixed; border-radius: 50%; background: var(--accent);
+    filter: blur(100px); opacity: 0.05; z-index: -1; pointer-events: none;
+    animation: float 20s infinite ease-in-out alternate;
+}
+@keyframes float {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+    .hero { flex-direction: column-reverse; text-align: center; padding-top: 8rem; }
+    .hero-text h1 { font-size: 2.8rem; }
+    .timeline::before { left: 0; }
+    .timeline-item { width: 100%; padding-left: 2rem; padding-right: 0; }
+    .timeline-item:nth-child(even) { left: 0; }
+    .timeline-dot { left: -8px !important; }
+}

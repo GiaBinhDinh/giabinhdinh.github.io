@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đinh Gia Bình | Portfolio</title>
+    <title>Đinh Gia Bình | Executive Profile</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -98,16 +98,16 @@
             border: 2px solid var(--accent-gold); border-radius: 8px; z-index: 1;
         }
 
-        /* --- BUTTONS (FLEXBOX ALIGNMENT FIX) --- */
+        /* --- BUTTONS (FLEXBOX ALIGNMENT) --- */
         #hero-buttons {
             display: flex;
             align-items: center;
-            gap: 1rem; /* Khoảng cách đều giữa các nút */
-            flex-wrap: wrap; /* Hỗ trợ hiển thị tốt trên di động */
+            gap: 1rem; 
+            flex-wrap: wrap; 
         }
 
         .btn {
-            display: inline-flex; /* Chuyển từ inline-block sang inline-flex để căn chỉnh icon và chữ */
+            display: inline-flex; 
             align-items: center;
             justify-content: center;
             padding: 0.8rem 2rem; 
@@ -133,10 +133,8 @@
         .btn-primary::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
             background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
             transform: skewX(-25deg);
             transition: left 0.7s ease;
@@ -147,9 +145,7 @@
             transform: translateY(-3px); 
         }
 
-        .btn-primary:hover::before {
-            left: 200%;
-        }
+        .btn-primary:hover::before { left: 200%; }
 
         .btn-outline { 
             background: transparent; 
@@ -175,7 +171,7 @@
         .quote-text { font-size: 1.3rem; font-weight: 600; font-style: italic; color: var(--text-heading); line-height: 1.8; letter-spacing: -0.5px;}
         .quote-author { display: block; margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-light); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
 
-        /* --- 6. CORE EXPERTISE & VENTURES (Cards) --- */
+        /* --- 6. VENTURES (Cards) --- */
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .card {
             background: var(--bg-card); padding: 2.5rem; border-radius: 8px; border: 1px solid var(--border-color);
@@ -186,7 +182,55 @@
         .card-title { font-size: 1.25rem; margin-bottom: 1rem; }
         .card-text { color: var(--text-light); font-size: 0.95rem; }
 
-        /* --- 7. TIMELINE --- */
+        /* --- 7. INFINITE LOOP MARQUEE (Khôi phục Năng Lực Cốt Lõi) --- */
+        .marquee-wrapper {
+            position: relative;
+            width: 100vw;
+            max-width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+            padding: 2rem 0;
+            /* Tạo màng lọc mờ dần ở 2 mép màn hình */
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            gap: 2rem;
+            animation: scrollMarquee 30s linear infinite; /* Chạy vô tận */
+        }
+
+        /* Dừng chạy khi di chuột vào */
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            width: 380px; 
+            flex-shrink: 0;
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-soft);
+            transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.4s ease;
+            cursor: pointer;
+        }
+        .marquee-item:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+        }
+
+        @keyframes scrollMarquee {
+            to {
+                transform: translateX(calc(-50% - 1rem)); 
+            }
+        }
+
+        /* --- 8. TIMELINE --- */
         .timeline { position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; padding: 20px 0; }
         .timeline::before {
             content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
@@ -212,7 +256,7 @@
         }
         .timeline-title { font-size: 1.2rem; margin-bottom: 0.5rem; }
 
-        /* --- 8. FOOTER --- */
+        /* --- 9. FOOTER --- */
         .footer { 
             background: var(--bg-card); color: var(--text-main); padding: 4rem 0 2rem; text-align: center; 
             border-top: 1px solid var(--border-color); transition: background-color 0.4s ease, border-color 0.4s ease;
@@ -229,7 +273,7 @@
             .timeline-item { width: 100%; padding-left: 2rem; padding-right: 0; }
             .timeline-item:nth-child(even) { left: 0; }
             .timeline-dot { left: -8px !important; }
-            #hero-buttons { justify-content: center; } /* Căn giữa nút trên mobile */
+            #hero-buttons { justify-content: center; }
         }
     </style>
 </head>
@@ -309,26 +353,55 @@
         </div>
     </section>
 
-    <section id="expertise" class="section" style="background-color: var(--bg-card); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <section id="expertise" class="section" style="background-color: var(--bg-card); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); overflow: hidden;">
         <div class="container">
-            <div class="section-header gsap-fade">
+            <div class="section-header fade-in">
                 <h2 class="section-title">Năng Lực Cốt Lõi</h2>
             </div>
-            <div class="grid-3 expert-grid">
-                <div class="card expert-card" style="background: transparent; border:none; box-shadow:none;">
-                    <i class="fas fa-balance-scale card-icon" style="font-size: 2rem;"></i>
-                    <h3 class="card-title">Đàm Phán Thương Mại</h3>
-                    <p class="card-text">Áp dụng phương châm WIN-WIN trong đàm phán, đảm bảo lợi ích chiến lược cho cả đối tác Việt Nam và Nhật Bản.</p>
-                </div>
-                <div class="card expert-card" style="background: transparent; border:none; box-shadow:none;">
-                    <i class="fas fa-yin-yang card-icon" style="font-size: 2rem;"></i>
-                    <h3 class="card-title">Giao Thoa Văn Hóa</h3>
-                    <p class="card-text">Am hiểu sâu sắc văn hóa doanh nghiệp và có thâm niên hợp tác với người Nhật từ năm 1993, xóa bỏ mọi rào cản giao tiếp.</p>
-                </div>
-                <div class="card expert-card" style="background: transparent; border:none; box-shadow:none;">
-                    <i class="fas fa-project-diagram card-icon" style="font-size: 2rem;"></i>
-                    <h3 class="card-title">Kết Nối Dự Án</h3>
-                    <p class="card-text">Năng lực tổ chức, kết nối và đàm phán thành công các dự án chuyển giao công nghệ quy mô lớn đa ngành nghề.</p>
+            
+            <div class="marquee-wrapper fade-in">
+                <div class="marquee-track">
+                    <div class="marquee-item">
+                        <i class="fas fa-balance-scale card-icon"></i>
+                        <h3 class="card-title">Đàm Phán Thương Mại</h3>
+                        <p class="card-text">Áp dụng phương châm WIN-WIN trong đàm phán, đảm bảo lợi ích chiến lược cho cả đối tác Việt Nam và Nhật Bản.</p>
+                    </div>
+                    <div class="marquee-item">
+                        <i class="fas fa-yin-yang card-icon"></i>
+                        <h3 class="card-title">Giao Thoa Văn Hóa</h3>
+                        <p class="card-text">Am hiểu sâu sắc văn hóa doanh nghiệp và có thâm niên hợp tác với người Nhật từ năm 1993, xóa bỏ mọi rào cản giao tiếp.</p>
+                    </div>
+                    <div class="marquee-item">
+                        <i class="fas fa-project-diagram card-icon"></i>
+                        <h3 class="card-title">Kết Nối Dự Án</h3>
+                        <p class="card-text">Năng lực tổ chức, kết nối và đàm phán thành công các dự án chuyển giao công nghệ quy mô lớn đa ngành nghề.</p>
+                    </div>
+                    <div class="marquee-item">
+                        <i class="fas fa-globe-asia card-icon"></i>
+                        <h3 class="card-title">Mở Rộng Thị Trường</h3>
+                        <p class="card-text">Kinh nghiệm đưa nông sản Việt Nam thâm nhập thị trường Nhật Bản và mang công nghệ Nhật về ứng dụng tại Việt Nam.</p>
+                    </div>
+
+                    <div class="marquee-item">
+                        <i class="fas fa-balance-scale card-icon"></i>
+                        <h3 class="card-title">Đàm Phán Thương Mại</h3>
+                        <p class="card-text">Áp dụng phương châm WIN-WIN trong đàm phán, đảm bảo lợi ích chiến lược cho cả đối tác Việt Nam và Nhật Bản.</p>
+                    </div>
+                    <div class="marquee-item">
+                        <i class="fas fa-yin-yang card-icon"></i>
+                        <h3 class="card-title">Giao Thoa Văn Hóa</h3>
+                        <p class="card-text">Am hiểu sâu sắc văn hóa doanh nghiệp và có thâm niên hợp tác với người Nhật từ năm 1993, xóa bỏ mọi rào cản giao tiếp.</p>
+                    </div>
+                    <div class="marquee-item">
+                        <i class="fas fa-project-diagram card-icon"></i>
+                        <h3 class="card-title">Kết Nối Dự Án</h3>
+                        <p class="card-text">Năng lực tổ chức, kết nối và đàm phán thành công các dự án chuyển giao công nghệ quy mô lớn đa ngành nghề.</p>
+                    </div>
+                    <div class="marquee-item">
+                        <i class="fas fa-globe-asia card-icon"></i>
+                        <h3 class="card-title">Mở Rộng Thị Trường</h3>
+                        <p class="card-text">Kinh nghiệm đưa nông sản Việt Nam thâm nhập thị trường Nhật Bản và mang công nghệ Nhật về ứng dụng tại Việt Nam.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -384,6 +457,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
@@ -526,18 +600,48 @@
 
                 // F. Standard Fade for remaining text elements
                 gsap.utils.toArray('.section-header, .philosophy-grid h2, .philosophy-grid p').forEach(el => {
-                    gsap.fromTo(el, 
-                        { opacity: 0, y: 30 },
-                        {
-                            opacity: 1, y: 0, duration: 1, ease: "power3.out",
-                            scrollTrigger: {
-                                trigger: el,
-                                start: "top 85%",
-                                toggleActions: "play none none none"
+                    // Check if it's the section header inside the marquee section to avoid double animating
+                    if(!el.classList.contains('fade-in')) {
+                        gsap.fromTo(el, 
+                            { opacity: 0, y: 30 },
+                            {
+                                opacity: 1, y: 0, duration: 1, ease: "power3.out",
+                                scrollTrigger: {
+                                    trigger: el,
+                                    start: "top 85%",
+                                    toggleActions: "play none none none"
+                                }
                             }
-                        }
-                    );
+                        );
+                    }
                 });
+
+                // G. Marquee Wrapper fade in
+                gsap.fromTo(".marquee-wrapper.fade-in",
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1, y: 0, duration: 1, ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: ".marquee-wrapper",
+                            start: "top 85%",
+                            toggleActions: "play none none none"
+                        }
+                    }
+                );
+                
+                // H. Section Header inside Marquee fade in
+                gsap.fromTo(".section-header.fade-in",
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1, y: 0, duration: 1, ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: ".section-header.fade-in",
+                            start: "top 85%",
+                            toggleActions: "play none none none"
+                        }
+                    }
+                );
+
             } else {
                 console.warn("GSAP is not loaded. Animations will not play.");
             }

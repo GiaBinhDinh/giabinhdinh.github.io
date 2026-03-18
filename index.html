@@ -26,7 +26,7 @@
         }
 
         [data-theme="dark"] {
-            /* DARK MODE (Deep Midnight Blue/Slate) */
+            /* DARK MODE */
             --bg-main: #0b1120;
             --bg-card: #151e2e;
             --bg-nav: rgba(11, 17, 32, 0.95);
@@ -40,16 +40,23 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
+        
         body {
-            font-family: var(--font-body); color: var(--text-main);
-            background-color: var(--bg-main); line-height: 1.7;
+            font-family: var(--font-body); 
+            color: var(--text-main);
+            background-color: var(--bg-main); 
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
             transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden; /* Ngăn cuộn ngang do animation */
         }
 
         h1, h2, h3, h4 { 
-            font-family: var(--font-heading); color: var(--text-heading); 
-            font-weight: 700; letter-spacing: -0.5px; transition: color 0.4s ease;
+            font-family: var(--font-heading); 
+            color: var(--text-heading); 
+            font-weight: 700; 
+            letter-spacing: -0.5px; 
+            transition: color 0.4s ease;
         }
 
         #scroll-progress {
@@ -65,14 +72,25 @@
             align-items: center; transition: all 0.4s ease;
         }
         .nav-logo { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; color: var(--text-heading); letter-spacing: -0.5px; }
+        
+        .nav-right { display: flex; align-items: center; }
         .nav-links { display: flex; align-items: center; }
         .nav-links a {
             margin-left: 2rem; text-decoration: none; color: var(--text-main);
-            font-weight: 500; font-size: 0.9rem; transition: color 0.3s;
+            font-weight: 500; font-size: 0.95rem; transition: color 0.3s;
         }
         .nav-links a:hover { color: var(--accent-gold); }
-        .toggle-btn { background: none; border: none; color: var(--text-main); font-size: 1.2rem; margin-left: 2rem; cursor: pointer; transition: color 0.3s; }
+        
+        .toggle-btn { 
+            background: none; border: none; color: var(--text-main); 
+            font-size: 1.2rem; margin-left: 2rem; cursor: pointer; transition: color 0.3s; 
+        }
         .toggle-btn:hover { color: var(--accent-gold); }
+
+        .mobile-menu-btn {
+            display: none; background: none; border: none;
+            color: var(--text-heading); font-size: 1.5rem; margin-left: 1.5rem; cursor: pointer;
+        }
 
         /* --- 3. LAYOUT UTILITIES --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
@@ -98,68 +116,32 @@
             border: 2px solid var(--accent-gold); border-radius: 8px; z-index: 1;
         }
 
-        /* --- BUTTONS (FLEXBOX ALIGNMENT) --- */
-        #hero-buttons {
-            display: flex;
-            align-items: center;
-            gap: 1rem; 
-            flex-wrap: wrap; 
-        }
+        /* --- BUTTONS --- */
+        #hero-buttons { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 
         .btn {
-            display: inline-flex; 
-            align-items: center;
-            justify-content: center;
-            padding: 0.8rem 2rem; 
-            border-radius: 4px; 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-family: var(--font-heading); 
-            font-size: 0.9rem; 
-            cursor: pointer; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease; 
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.8rem 2rem; border-radius: 4px; text-decoration: none; 
+            font-weight: 600; font-family: var(--font-heading); font-size: 0.9rem; 
+            cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s ease; 
         }
         
         .btn-primary { 
-            background: var(--accent-gold); 
-            color: #fff; 
-            border: 1px solid var(--accent-gold); 
-            position: relative;
-            overflow: hidden; 
+            background: var(--accent-gold); color: #fff; border: 1px solid var(--accent-gold); 
+            position: relative; overflow: hidden; 
         }
-        
         .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
             background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-25deg);
-            transition: left 0.7s ease;
+            transform: skewX(-25deg); transition: left 0.7s ease;
         }
-
-        .btn-primary:hover { 
-            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.4); 
-            transform: translateY(-3px); 
-        }
-
+        .btn-primary:hover { box-shadow: 0 10px 20px rgba(197, 160, 89, 0.4); transform: translateY(-3px); }
         .btn-primary:hover::before { left: 200%; }
 
-        .btn-outline { 
-            background: transparent; 
-            color: var(--text-heading); 
-            border: 1px solid var(--border-color); 
-        }
-        
-        .btn-outline:hover { 
-            border-color: var(--accent-gold); 
-            color: var(--accent-gold); 
-            transform: translateY(-2px); 
-        }
+        .btn-outline { background: transparent; color: var(--text-heading); border: 1px solid var(--border-color); }
+        .btn-outline:hover { border-color: var(--accent-gold); color: var(--accent-gold); transform: translateY(-2px); }
 
-        .contact-info { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; gap: 2rem; color: var(--text-light); font-size: 0.95rem; font-weight: 500; }
+        .contact-info { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; flex-wrap: wrap; gap: 2rem; color: var(--text-light); font-size: 0.95rem; font-weight: 500; }
         .contact-info i { color: var(--accent-gold); margin-right: 8px; }
 
         /* --- 5. PHILOSOPHY & VISION --- */
@@ -182,56 +164,29 @@
         .card-title { font-size: 1.25rem; margin-bottom: 1rem; }
         .card-text { color: var(--text-light); font-size: 0.95rem; }
 
-        /* --- 7. INFINITE LOOP MARQUEE (Khôi phục Năng Lực Cốt Lõi) --- */
+        /* --- 7. INFINITE LOOP MARQUEE --- */
         .marquee-wrapper {
-            position: relative;
-            width: 100vw;
-            max-width: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            overflow: hidden;
-            padding: 2rem 0;
-            /* Tạo màng lọc mờ dần ở 2 mép màn hình */
+            position: relative; width: 100vw; max-width: 100%; left: 50%; transform: translateX(-50%);
+            overflow: hidden; padding: 2rem 0;
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
-        
         .marquee-track {
-            display: flex;
-            width: max-content;
-            gap: 2rem;
-            animation: scrollMarquee 30s linear infinite; /* Chạy vô tận */
+            display: flex; width: max-content; gap: 2rem;
+            animation: scrollMarquee 30s linear infinite;
         }
-
-        /* Dừng chạy khi di chuột vào */
-        .marquee-track:hover {
-            animation-play-state: paused;
-        }
-
+        .marquee-track:hover { animation-play-state: paused; }
         .marquee-item {
-            width: 380px; 
-            flex-shrink: 0;
-            background: var(--bg-card);
-            padding: 2.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-soft);
-            transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.4s ease;
-            cursor: pointer;
+            width: 380px; flex-shrink: 0; background: var(--bg-card); padding: 2.5rem;
+            border-radius: 8px; border: 1px solid var(--border-color); box-shadow: var(--shadow-soft);
+            transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.4s ease; cursor: pointer;
         }
-        .marquee-item:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-5px);
-        }
+        .marquee-item:hover { border-color: var(--accent-gold); transform: translateY(-5px); }
 
-        @keyframes scrollMarquee {
-            to {
-                transform: translateX(calc(-50% - 1rem)); 
-            }
-        }
+        @keyframes scrollMarquee { to { transform: translateX(calc(-50% - 1rem)); } }
 
         /* --- 8. TIMELINE --- */
-        .timeline { position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; padding: 20px 0; }
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 20px 0; }
         .timeline::before {
             content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
             width: 2px; background: var(--border-color); transform: translateX(-50%);
@@ -264,16 +219,62 @@
         .footer-logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-heading); letter-spacing: -0.5px; }
         .footer-text { color: var(--text-light); font-size: 0.9rem; margin-bottom: 2rem; font-weight: 500; }
         
+        /* =========================================
+           10. RESPONSIVE DESIGN (MOBILE & TABLET)
+           ========================================= */
+        
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .hero { padding-top: 8rem; gap: 2rem; }
+            .hero-title { font-size: 3rem; }
+            .section-title { font-size: 2.2rem; }
+            .philosophy-grid { gap: 2rem; }
+            .marquee-item { width: 320px; padding: 2rem; }
+        }
+
+        /* Mobile Phones */
         @media (max-width: 768px) {
-            .hero { flex-direction: column-reverse; text-align: center; padding-top: 8rem; }
+            .section { padding: 4rem 0; }
+            .navbar { padding: 1rem 5%; }
+            
+            /* Navbar Mobile Menu */
+            .mobile-menu-btn { display: block; }
+            .nav-links {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background: var(--bg-nav);
+                flex-direction: column;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                max-height: 0; overflow: hidden;
+                transition: max-height 0.4s ease;
+                padding: 0;
+            }
+            .nav-links.active { max-height: 300px; padding: 1rem 0; }
+            .nav-links a { margin: 0.75rem 0; text-align: center; width: 100%; font-size: 1rem; }
+
+            .toggle-btn { margin-left: 0; }
+
+            /* Hero Section */
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 7rem; }
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.1rem; }
             .hero-image-backdrop { display: none; }
-            .contact-info { flex-direction: column; gap: 1rem; align-items: center; }
+            #hero-buttons { justify-content: center; }
+            .contact-info { flex-direction: column; gap: 0.5rem; align-items: center; justify-content: center;}
+
+            /* Layout Fixes */
             .philosophy-grid { grid-template-columns: 1fr; perspective: none; }
+            .quote-block { padding: 2rem; }
+            .grid-3 { grid-template-columns: 1fr; }
+            
+            /* Responsive Marquee */
+            .marquee-item { width: 85vw; padding: 1.5rem; }
+
+            /* Responsive Timeline */
             .timeline::before { left: 0; }
-            .timeline-item { width: 100%; padding-left: 2rem; padding-right: 0; }
+            .timeline-item { width: 100%; padding-left: 2rem; padding-right: 0; margin-bottom: 2rem; }
             .timeline-item:nth-child(even) { left: 0; }
             .timeline-dot { left: -8px !important; }
-            #hero-buttons { justify-content: center; }
         }
     </style>
 </head>
@@ -283,12 +284,15 @@
 
     <nav class="navbar" id="navbar">
         <div class="nav-logo">HỒ SƠ DOANH NHÂN</div>
-        <div class="nav-links">
-            <a href="#about">Triết Lý</a>
-            <a href="#expertise">Năng Lực</a>
-            <a href="#ventures">Lĩnh Vực</a>
-            <a href="#timeline">Hành Trình</a>
+        <div class="nav-right">
+            <div class="nav-links" id="nav-links">
+                <a href="#about">Triết Lý</a>
+                <a href="#expertise">Năng Lực</a>
+                <a href="#ventures">Lĩnh Vực</a>
+                <a href="#timeline">Hành Trình</a>
+            </div>
             <button id="theme-toggle" class="toggle-btn"><i class="fas fa-moon"></i></button>
+            <button id="mobile-menu-btn" class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
@@ -300,7 +304,7 @@
             
             <div id="hero-buttons">
                 <a href="#about" class="btn btn-primary">Khám Phá Hồ Sơ</a>
-                <a href="mailto:japantechhcm@gmail.com" class="btn btn-outline"><i class="fas fa-envelope" style="margin-right: 8px;"></i> Liên Hệ Trực Tiếp</a>
+                <a href="mailto:japantechhcm@gmail.com" class="btn btn-outline"><i class="fas fa-envelope" style="margin-right: 8px;"></i> Liên Hệ</a>
             </div>
 
             <div class="contact-info" id="hero-contact">
@@ -412,7 +416,6 @@
             <h2 class="section-title">Hành Trình Phát Triển</h2>
         </div>
         <div class="timeline">
-            
             <div class="timeline-item gsap-fade">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
@@ -421,7 +424,6 @@
                     <p style="color: var(--text-light); font-size: 0.95rem;">Tiếp nhận và chuyển giao trực tiếp quy trình xử lý nước thải và rác thải nguy hại từ các chuyên gia Nhật Bản về ứng dụng tại Việt Nam.</p>
                 </div>
             </div>
-
             <div class="timeline-item gsap-fade">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
@@ -430,7 +432,6 @@
                     <p style="color: var(--text-light); font-size: 0.95rem;">Về Việt Nam thực nghiệm các quy trình ứng dụng vi sinh vật bản địa vào xử lý phụ phẩm nông nghiệp thành phân bón hữu cơ.</p>
                 </div>
             </div>
-
             <div class="timeline-item gsap-fade">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
@@ -439,7 +440,6 @@
                     <p style="color: var(--text-light); font-size: 0.95rem;">Học tập và làm việc tại Hiroshima, Nhật Bản. Xây dựng nền tảng tư duy kỷ luật, tác phong làm việc và thiết lập mạng lưới đối tác.</p>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -479,22 +479,35 @@
             });
 
             function updateToggleIcon(theme) {
-                themeToggle.innerHTML = theme === 'dark' ? 
-                    '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
             }
 
-            // --- 2. DYNAMIC NAVBAR & SCROLL PROGRESS ---
+            // --- 2. MOBILE MENU LOGIC ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navLinks = document.getElementById('nav-links');
+
+            if (mobileMenuBtn && navLinks) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+
+                // Auto-close menu when clicking a link
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                    });
+                });
+            }
+
+            // --- 3. SCROLL PROGRESS & NAVBAR SHRINK ---
             const navbar = document.querySelector('.navbar');
             
             window.addEventListener('scroll', () => {
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 
-                // Progress Bar
-                const scrolled = (winScroll / height) * 100;
-                document.getElementById("scroll-progress").style.width = scrolled + "%";
+                document.getElementById("scroll-progress").style.width = (winScroll / height) * 100 + "%";
 
-                // Navbar Shadow & Shrink on Scroll
                 if (winScroll > 50) {
                     navbar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.05)";
                     navbar.style.padding = "0.5rem 5%"; 
@@ -504,142 +517,81 @@
                 }
             });
 
-            // --- 3. ADVANCED GSAP CHOREOGRAPHY ---
+            // --- 4. ADVANCED GSAP CHOREOGRAPHY ---
             if (typeof gsap !== 'undefined') {
                 gsap.registerPlugin(ScrollTrigger);
 
-                // A. Initial Page Load Sequence (Hero Section)
+                // A. Initial Page Load
                 const tlLoad = gsap.timeline({ defaults: { ease: "power3.out" } });
-                
-                tlLoad.fromTo(".nav-logo, .nav-links a, .toggle-btn", 
-                    { opacity: 0, y: -15 }, 
-                    { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }
+                tlLoad.fromTo(".nav-logo, .nav-links a, .toggle-btn, .mobile-menu-btn", 
+                    { opacity: 0, y: -15 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }
                 )
                 .fromTo(".hero-text > *", 
-                    { opacity: 0, y: 30 }, 
-                    { opacity: 1, y: 0, duration: 1, stagger: 0.15 }, 
-                    "-=0.4" 
+                    { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, stagger: 0.15 }, "-=0.4" 
                 )
                 .fromTo(".hero-image-backdrop", 
-                    { opacity: 0, x: -20 }, 
-                    { opacity: 1, x: 0, duration: 1 }, 
-                    "-=0.6"
+                    { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 1 }, "-=0.6"
                 )
                 .fromTo(".hero-image", 
-                    { opacity: 0, x: 20 }, 
-                    { opacity: 1, x: 0, duration: 1 }, 
-                    "-=0.8"
+                    { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 1 }, "-=0.8"
                 );
 
-                // B. Hero Image Parallax on Scroll
+                // B. Hero Parallax
                 gsap.to(".hero-image-wrapper", {
-                    yPercent: 15, 
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: ".hero",
-                        start: "top top",
-                        end: "bottom top",
-                        scrub: true
-                    }
+                    yPercent: 15, ease: "none",
+                    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
                 });
 
-                // C. THE "OPEN A BOOK / ZOOM OUT" REVEAL
-                gsap.fromTo(".book-left", 
-                    { rotationY: 45, opacity: 0, transformOrigin: "right center", scale: 0.8 },
-                    { rotationY: 0, opacity: 1, scale: 1, ease: "power2.out",
-                      scrollTrigger: { trigger: ".philosophy-grid", start: "top 85%", end: "center center", scrub: 1 }
-                    }
-                );
-                gsap.fromTo(".book-right", 
-                    { rotationY: -45, opacity: 0, transformOrigin: "left center", scale: 0.8 },
-                    { rotationY: 0, opacity: 1, scale: 1, ease: "power2.out",
-                      scrollTrigger: { trigger: ".philosophy-grid", start: "top 85%", end: "center center", scrub: 1 }
-                    }
-                );
+                // C. 3D Book Reveal (Disabled on Mobile for better performance)
+                if (window.innerWidth > 768) {
+                    gsap.fromTo(".book-left", 
+                        { rotationY: 45, opacity: 0, transformOrigin: "right center", scale: 0.8 },
+                        { rotationY: 0, opacity: 1, scale: 1, ease: "power2.out", scrollTrigger: { trigger: ".philosophy-grid", start: "top 85%", end: "center center", scrub: 1 } }
+                    );
+                    gsap.fromTo(".book-right", 
+                        { rotationY: -45, opacity: 0, transformOrigin: "left center", scale: 0.8 },
+                        { rotationY: 0, opacity: 1, scale: 1, ease: "power2.out", scrollTrigger: { trigger: ".philosophy-grid", start: "top 85%", end: "center center", scrub: 1 } }
+                    );
+                } else {
+                    // Mobile fallback for Book Reveal
+                    gsap.from(".book-left, .book-right", {
+                        y: 30, opacity: 0, duration: 0.8, stagger: 0.2, ease: "power3.out",
+                        scrollTrigger: { trigger: ".philosophy-grid", start: "top 85%", toggleActions: "play none none none" }
+                    });
+                }
 
-                // D. Staggered Grid Cards (Lĩnh Vực & Năng Lực)
+                // D. Staggered Grid Cards
                 gsap.utils.toArray('.grid-3').forEach(grid => {
                     gsap.fromTo(grid.querySelectorAll('.card'),
                         { opacity: 0, y: 40 },
-                        {
-                            opacity: 1, 
-                            y: 0,
-                            duration: 0.8,
-                            stagger: 0.2, 
-                            ease: "power3.out",
-                            scrollTrigger: {
-                                trigger: grid,
-                                start: "top 80%",
-                                toggleActions: "play none none none"
-                            }
-                        }
+                        { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power3.out", scrollTrigger: { trigger: grid, start: "top 80%", toggleActions: "play none none none" } }
                     );
                 });
 
-                // E. Directional Timeline Animations
+                // E. Directional Timeline
                 gsap.utils.toArray('.timeline-item').forEach((item, index) => {
-                    const isEven = index % 2 === 0;
-                    const xOffset = isEven ? -40 : 40; 
-                    
+                    // On mobile, everything comes from the bottom. On desktop, alternate left/right.
+                    const isMobile = window.innerWidth <= 768;
+                    const xOffset = isMobile ? 0 : (index % 2 === 0 ? -40 : 40); 
+                    const yOffset = isMobile ? 30 : 20;
+
                     gsap.fromTo(item,
-                        { opacity: 0, x: xOffset, y: 20 },
-                        {
-                            opacity: 1, 
-                            x: 0, 
-                            y: 0,
-                            duration: 1,
-                            ease: "power3.out",
-                            scrollTrigger: {
-                                trigger: item,
-                                start: "top 85%",
-                                toggleActions: "play none none none"
-                            }
-                        }
+                        { opacity: 0, x: xOffset, y: yOffset },
+                        { opacity: 1, x: 0, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none none" } }
                     );
                 });
 
-                // F. Standard Fade for remaining text elements
-                gsap.utils.toArray('.section-header, .philosophy-grid h2, .philosophy-grid p').forEach(el => {
-                    // Check if it's the section header inside the marquee section to avoid double animating
-                    if(!el.classList.contains('fade-in')) {
-                        gsap.fromTo(el, 
-                            { opacity: 0, y: 30 },
-                            {
-                                opacity: 1, y: 0, duration: 1, ease: "power3.out",
-                                scrollTrigger: {
-                                    trigger: el,
-                                    start: "top 85%",
-                                    toggleActions: "play none none none"
-                                }
-                            }
-                        );
-                    }
+                // F. Standard Fades
+                gsap.utils.toArray('.section-header:not(.fade-in)').forEach(header => {
+                    gsap.from(header, { scrollTrigger: { trigger: header, start: "top 90%", toggleActions: "play none none none" }, y: 30, opacity: 0, duration: 0.8 });
                 });
-
-                // G. Marquee Wrapper fade in
-                gsap.fromTo(".marquee-wrapper.fade-in",
-                    { opacity: 0, y: 30 },
-                    {
-                        opacity: 1, y: 0, duration: 1, ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: ".marquee-wrapper",
-                            start: "top 85%",
-                            toggleActions: "play none none none"
-                        }
-                    }
-                );
                 
-                // H. Section Header inside Marquee fade in
+                // G. Marquee Fades
+                gsap.fromTo(".marquee-wrapper.fade-in",
+                    { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: ".marquee-wrapper", start: "top 85%", toggleActions: "play none none none" } }
+                );
                 gsap.fromTo(".section-header.fade-in",
-                    { opacity: 0, y: 30 },
-                    {
-                        opacity: 1, y: 0, duration: 1, ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: ".section-header.fade-in",
-                            start: "top 85%",
-                            toggleActions: "play none none none"
-                        }
-                    }
+                    { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: ".section-header.fade-in", start: "top 85%", toggleActions: "play none none none" } }
                 );
 
             } else {

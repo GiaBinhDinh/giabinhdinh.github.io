@@ -244,11 +244,28 @@
             .marquee-item { width: 320px; padding: 2rem; }
         }
 
+/* Mobile Responsiveness */
         @media (max-width: 768px) {
             .section { padding: 4rem 0; }
-            .navbar { padding: 1rem 5%; }
-            .mobile-menu-btn { display: block; }
-            .lang-switcher { margin-left: 1rem; }
+            .navbar { padding: 0.8rem 5%; }
+            
+            /* 1. Thu nhỏ chữ Logo và cho phép rớt dòng gọn gàng */
+            .nav-logo { 
+                font-size: 1rem; 
+                line-height: 1.2; 
+                max-width: 100px; 
+            }
+
+            /* 2. Căn chỉnh lại cụm nút bên phải cho sát nhau hơn */
+            .nav-right {
+                gap: 0.5rem; /* Dùng gap thay cho margin */
+            }
+            .lang-switcher { margin-left: 0; padding: 2px; }
+            .lang-opt { padding: 4px 8px; font-size: 0.75rem; }
+            .toggle-btn { margin-left: 0; font-size: 1.1rem; }
+            
+            .mobile-menu-btn { display: block; margin-left: 0; font-size: 1.3rem; }
+            
             .nav-links {
                 position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-nav);
                 flex-direction: column; border-bottom: 1px solid var(--border-color);
@@ -274,6 +291,13 @@
             .timeline-item { width: 100%; padding-left: 2rem; padding-right: 0; margin-bottom: 2rem; }
             .timeline-item:nth-child(even) { left: 0; }
             .timeline-dot { left: -8px !important; }
+        }
+
+        /* Thêm một breakpoint cho các màn hình điện thoại cực nhỏ (như iPhone SE) */
+        @media (max-width: 400px) {
+            .nav-logo { font-size: 0.85rem; max-width: 80px; }
+            .lang-opt { padding: 2px 6px; font-size: 0.65rem; }
+            .toggle-btn, .mobile-menu-btn { font-size: 1rem; }
         }
     </style>
 </head>

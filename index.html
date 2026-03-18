@@ -26,7 +26,7 @@
         }
 
         [data-theme="dark"] {
-            /* DARK MODE */
+            /* DARK MODE (Deep Midnight Blue/Slate) */
             --bg-main: #0b1120;
             --bg-card: #151e2e;
             --bg-nav: rgba(11, 17, 32, 0.95);
@@ -40,23 +40,17 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        
         body {
-            font-family: var(--font-body); 
-            color: var(--text-main);
-            background-color: var(--bg-main); 
-            line-height: 1.7;
+            font-family: var(--font-body); color: var(--text-main);
+            background-color: var(--bg-main); line-height: 1.7;
             -webkit-font-smoothing: antialiased;
             transition: background-color 0.4s ease, color 0.4s ease;
-            overflow-x: hidden; /* Ngăn cuộn ngang do animation */
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4 { 
-            font-family: var(--font-heading); 
-            color: var(--text-heading); 
-            font-weight: 700; 
-            letter-spacing: -0.5px; 
-            transition: color 0.4s ease;
+            font-family: var(--font-heading); color: var(--text-heading); 
+            font-weight: 700; letter-spacing: -0.5px; transition: color 0.4s ease;
         }
 
         #scroll-progress {
@@ -64,7 +58,7 @@
             background: var(--accent-gold); z-index: 1001; transition: width 0.1s ease-out;
         }
 
-        /* --- 2. NAVIGATION --- */
+        /* --- 2. NAVIGATION & LANG SWITCHER --- */
         .navbar {
             position: fixed; top: 0; width: 100%; background: var(--bg-nav);
             backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color);
@@ -81,9 +75,43 @@
         }
         .nav-links a:hover { color: var(--accent-gold); }
         
+        /* Language Slide Switcher */
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: var(--border-color);
+            border-radius: 20px;
+            padding: 4px;
+            margin-left: 2rem;
+        }
+        .lang-slider {
+            position: absolute;
+            top: 4px; bottom: 4px; left: 4px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+        .lang-opt {
+            position: relative;
+            z-index: 2;
+            border: none;
+            background: transparent;
+            padding: 4px 12px;
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .lang-opt.active { color: var(--accent-gold); }
+        
         .toggle-btn { 
             background: none; border: none; color: var(--text-main); 
-            font-size: 1.2rem; margin-left: 2rem; cursor: pointer; transition: color 0.3s; 
+            font-size: 1.2rem; margin-left: 1.5rem; cursor: pointer; transition: color 0.3s;
         }
         .toggle-btn:hover { color: var(--accent-gold); }
 
@@ -118,18 +146,13 @@
 
         /* --- BUTTONS --- */
         #hero-buttons { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-
         .btn {
             display: inline-flex; align-items: center; justify-content: center;
             padding: 0.8rem 2rem; border-radius: 4px; text-decoration: none; 
             font-weight: 600; font-family: var(--font-heading); font-size: 0.9rem; 
             cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s ease; 
         }
-        
-        .btn-primary { 
-            background: var(--accent-gold); color: #fff; border: 1px solid var(--accent-gold); 
-            position: relative; overflow: hidden; 
-        }
+        .btn-primary { background: var(--accent-gold); color: #fff; border: 1px solid var(--accent-gold); position: relative; overflow: hidden; }
         .btn-primary::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
             background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
@@ -137,7 +160,6 @@
         }
         .btn-primary:hover { box-shadow: 0 10px 20px rgba(197, 160, 89, 0.4); transform: translateY(-3px); }
         .btn-primary:hover::before { left: 200%; }
-
         .btn-outline { background: transparent; color: var(--text-heading); border: 1px solid var(--border-color); }
         .btn-outline:hover { border-color: var(--accent-gold); color: var(--accent-gold); transform: translateY(-2px); }
 
@@ -153,7 +175,7 @@
         .quote-text { font-size: 1.3rem; font-weight: 600; font-style: italic; color: var(--text-heading); line-height: 1.8; letter-spacing: -0.5px;}
         .quote-author { display: block; margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-light); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
 
-        /* --- 6. VENTURES (Cards) --- */
+        /* --- 6. VENTURES & EXPERTISE (Cards) --- */
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .card {
             background: var(--bg-card); padding: 2.5rem; border-radius: 8px; border: 1px solid var(--border-color);
@@ -164,17 +186,14 @@
         .card-title { font-size: 1.25rem; margin-bottom: 1rem; }
         .card-text { color: var(--text-light); font-size: 0.95rem; }
 
-        /* --- 7. INFINITE LOOP MARQUEE --- */
+        /* --- 7. MARQUEE --- */
         .marquee-wrapper {
             position: relative; width: 100vw; max-width: 100%; left: 50%; transform: translateX(-50%);
             overflow: hidden; padding: 2rem 0;
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
-        .marquee-track {
-            display: flex; width: max-content; gap: 2rem;
-            animation: scrollMarquee 30s linear infinite;
-        }
+        .marquee-track { display: flex; width: max-content; gap: 2rem; animation: scrollMarquee 30s linear infinite; }
         .marquee-track:hover { animation-play-state: paused; }
         .marquee-item {
             width: 380px; flex-shrink: 0; background: var(--bg-card); padding: 2.5rem;
@@ -182,24 +201,21 @@
             transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.4s ease; cursor: pointer;
         }
         .marquee-item:hover { border-color: var(--accent-gold); transform: translateY(-5px); }
-
         @keyframes scrollMarquee { to { transform: translateX(calc(-50% - 1rem)); } }
 
         /* --- 8. TIMELINE --- */
-        .timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 20px 0; }
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; padding: 20px 0; }
         .timeline::before {
             content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
             width: 2px; background: var(--border-color); transform: translateX(-50%);
         }
         .timeline-item { margin-bottom: 3rem; position: relative; width: 50%; padding-right: 3rem; }
         .timeline-item:nth-child(even) { left: 50%; padding-left: 3rem; padding-right: 0; }
-        
         .timeline-dot {
             position: absolute; right: -8px; top: 0; width: 16px; height: 16px; border-radius: 50%;
             background: var(--accent-gold); border: 4px solid var(--bg-main); transition: border-color 0.4s ease;
         }
         .timeline-item:nth-child(even) .timeline-dot { left: -8px; }
-        
         .timeline-content { 
             background: var(--bg-card); padding: 2rem; border-radius: 8px; 
             border: 1px solid var(--border-color); box-shadow: var(--shadow-soft); 
@@ -219,11 +235,7 @@
         .footer-logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-heading); letter-spacing: -0.5px; }
         .footer-text { color: var(--text-light); font-size: 0.9rem; margin-bottom: 2rem; font-weight: 500; }
         
-        /* =========================================
-           10. RESPONSIVE DESIGN (MOBILE & TABLET)
-           ========================================= */
-        
-        /* Tablet */
+        /* --- 10. RESPONSIVE --- */
         @media (max-width: 1024px) {
             .hero { padding-top: 8rem; gap: 2rem; }
             .hero-title { font-size: 3rem; }
@@ -232,29 +244,20 @@
             .marquee-item { width: 320px; padding: 2rem; }
         }
 
-        /* Mobile Phones */
         @media (max-width: 768px) {
             .section { padding: 4rem 0; }
             .navbar { padding: 1rem 5%; }
-            
-            /* Navbar Mobile Menu */
             .mobile-menu-btn { display: block; }
+            .lang-switcher { margin-left: 1rem; }
             .nav-links {
-                position: absolute; top: 100%; left: 0; width: 100%;
-                background: var(--bg-nav);
-                flex-direction: column;
-                border-bottom: 1px solid var(--border-color);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-                max-height: 0; overflow: hidden;
-                transition: max-height 0.4s ease;
-                padding: 0;
+                position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-nav);
+                flex-direction: column; border-bottom: 1px solid var(--border-color);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1); max-height: 0; overflow: hidden;
+                transition: max-height 0.4s ease; padding: 0;
             }
             .nav-links.active { max-height: 300px; padding: 1rem 0; }
             .nav-links a { margin: 0.75rem 0; text-align: center; width: 100%; font-size: 1rem; }
 
-            .toggle-btn { margin-left: 0; }
-
-            /* Hero Section */
             .hero { flex-direction: column-reverse; text-align: center; padding-top: 7rem; }
             .hero-title { font-size: 2.5rem; }
             .hero-subtitle { font-size: 1.1rem; }
@@ -262,15 +265,11 @@
             #hero-buttons { justify-content: center; }
             .contact-info { flex-direction: column; gap: 0.5rem; align-items: center; justify-content: center;}
 
-            /* Layout Fixes */
             .philosophy-grid { grid-template-columns: 1fr; perspective: none; }
             .quote-block { padding: 2rem; }
             .grid-3 { grid-template-columns: 1fr; }
-            
-            /* Responsive Marquee */
             .marquee-item { width: 85vw; padding: 1.5rem; }
 
-            /* Responsive Timeline */
             .timeline::before { left: 0; }
             .timeline-item { width: 100%; padding-left: 2rem; padding-right: 0; margin-bottom: 2rem; }
             .timeline-item:nth-child(even) { left: 0; }
@@ -283,14 +282,22 @@
     <div id="scroll-progress"></div>
 
     <nav class="navbar" id="navbar">
-        <div class="nav-logo">HỒ SƠ DOANH NHÂN</div>
+        <div class="nav-logo" data-i18n="nav_logo">HỒ SƠ DOANH NHÂN</div>
         <div class="nav-right">
             <div class="nav-links" id="nav-links">
-                <a href="#about">Triết Lý</a>
-                <a href="#expertise">Năng Lực</a>
-                <a href="#ventures">Lĩnh Vực</a>
-                <a href="#timeline">Hành Trình</a>
+                <a href="#about" data-i18n="nav_philosophy">Triết Lý</a>
+                <a href="#expertise" data-i18n="nav_expertise">Năng Lực</a>
+                <a href="#ventures" data-i18n="nav_ventures">Lĩnh Vực</a>
+                <a href="#timeline" data-i18n="nav_timeline">Hành Trình</a>
             </div>
+            
+            <div class="lang-switcher" id="lang-switcher">
+                <div class="lang-slider" id="lang-slider"></div>
+                <button class="lang-opt" data-lang="vi">VI</button>
+                <button class="lang-opt" data-lang="en">EN</button>
+                <button class="lang-opt" data-lang="ja">JA</button>
+            </div>
+
             <button id="theme-toggle" class="toggle-btn"><i class="fas fa-moon"></i></button>
             <button id="mobile-menu-btn" class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
         </div>
@@ -298,18 +305,18 @@
 
     <section class="hero container" id="hero">
         <div class="hero-text gsap-fade">
-            <h1 class="hero-title" id="hero-title">Đinh Gia Bình</h1>
-            <h2 class="hero-subtitle" id="hero-subtitle">Giám đốc Công ty TNHH Japan-Tech</h2>
-            <p class="hero-desc" id="hero-desc">Chuyên gia kiến tạo cầu nối chiến lược giữa Việt Nam và Nhật Bản, tiên phong trong lĩnh vực môi trường, xử lý rác thải và nông nghiệp hữu cơ tuần hoàn.</p>
+            <h1 class="hero-title" data-i18n="hero_name">Đinh Gia Bình</h1>
+            <h2 class="hero-subtitle" data-i18n="hero_title">Giám đốc Công ty TNHH Japan-Tech</h2>
+            <p class="hero-desc" data-i18n="hero_desc">Chuyên gia kiến tạo cầu nối chiến lược giữa Việt Nam và Nhật Bản, tiên phong trong lĩnh vực môi trường, xử lý rác thải và nông nghiệp hữu cơ tuần hoàn.</p>
             
             <div id="hero-buttons">
-                <a href="#about" class="btn btn-primary">Khám Phá Hồ Sơ</a>
-                <a href="mailto:japantechhcm@gmail.com" class="btn btn-outline"><i class="fas fa-envelope" style="margin-right: 8px;"></i> Liên Hệ</a>
+                <a href="#about" class="btn btn-primary" data-i18n="btn_explore">Khám Phá Hồ Sơ</a>
+                <a href="mailto:japantechhcm@gmail.com" class="btn btn-outline"><i class="fas fa-envelope" style="margin-right: 8px;"></i> <span data-i18n="btn_contact">Liên Hệ Trực Tiếp</span></a>
             </div>
 
             <div class="contact-info" id="hero-contact">
                 <span><i class="fas fa-phone-alt"></i> 0938.090.979</span>
-                <span><i class="fas fa-headset"></i> 0399.720.041 (Trợ lý)</span>
+                <span><i class="fas fa-headset"></i> 0399.720.041 (<span data-i18n="contact_assistant">Trợ lý</span>)</span>
             </div>
         </div>
         
@@ -322,37 +329,37 @@
     <section id="about" class="section" style="background-color: var(--bg-card); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
         <div class="container philosophy-grid">
             <div class="quote-block book-left">
-                <p class="quote-text">"Bằng hai chữ 'HOÀN NGUYÊN', chúng tôi thấy mình có nghĩa vụ PHẢI TRẢ lại cho môi trường: Đất, nước, không khí những giá trị tốt đẹp nhất mà chúng ta đã VAY MƯỢN để sinh tồn trong một thời gian dài."</p>
-                <span class="quote-author">— Đinh Gia Bình</span>
+                <p class="quote-text" data-i18n="phil_quote">"Bằng hai chữ 'HOÀN NGUYÊN', chúng tôi thấy mình có nghĩa vụ PHẢI TRẢ lại cho môi trường: Đất, nước, không khí những giá trị tốt đẹp nhất mà chúng ta đã VAY MƯỢN để sinh tồn trong một thời gian dài."</p>
+                <span class="quote-author">— <span data-i18n="hero_name">Đinh Gia Bình</span></span>
             </div>
             
             <div class="philosophy-text book-right">
-                <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Định Hướng</h2>
-                <p style="color: var(--text-light); margin-bottom: 1.5rem;">Mục tiêu chiến lược của Japan-Tech là liên tục cập nhật và kết nối với các Doanh nghiệp Nhật Bản trong lĩnh vực công nghệ cao để tiếp nhận, chuyển giao cho các doanh nghiệp Việt Nam.</p>
-                <p style="color: var(--text-light);">Đồng thời, chúng tôi tìm kiếm các khách hàng tiềm năng tại Nhật Bản để đưa các mặt hàng nông sản chất lượng cao của Việt Nam vươn tầm quốc tế, duy trì và nâng cao năng lực làm cầu nối vững chắc.</p>
+                <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;" data-i18n="phil_title">Định Hướng & Kết Nối</h2>
+                <p style="color: var(--text-light); margin-bottom: 1.5rem;" data-i18n="phil_desc1">Mục tiêu chiến lược của Japan-Tech là liên tục cập nhật và kết nối với các Doanh nghiệp Nhật Bản trong lĩnh vực công nghệ cao để tiếp nhận, chuyển giao cho các doanh nghiệp Việt Nam.</p>
+                <p style="color: var(--text-light);" data-i18n="phil_desc2">Đồng thời, chúng tôi tìm kiếm các khách hàng tiềm năng tại Nhật Bản để đưa các mặt hàng nông sản chất lượng cao của Việt Nam vươn tầm quốc tế, duy trì và nâng cao năng lực làm cầu nối vững chắc.</p>
             </div>
         </div>
     </section>
 
     <section id="ventures" class="section container">
         <div class="section-header gsap-fade">
-            <h2 class="section-title">Lĩnh Vực Điều Hành</h2>
+            <h2 class="section-title" data-i18n="ven_title">Lĩnh Vực Điều Hành</h2>
         </div>
         <div class="grid-3 venture-grid">
             <div class="card venture-card">
                 <i class="fas fa-water card-icon"></i>
-                <h3 class="card-title">Xử Lý Môi Trường</h3>
-                <p class="card-text">Tiếp nhận và chuyển giao quy trình xử lý nước thải, rác thải công nghiệp và thương mại nguy hại từ Nhật Bản, áp dụng thực tiễn tại Việt Nam.</p>
+                <h3 class="card-title" data-i18n="ven_card1_title">Xử Lý Môi Trường</h3>
+                <p class="card-text" data-i18n="ven_card1_desc">Tiếp nhận và chuyển giao quy trình xử lý nước thải, rác thải công nghiệp và thương mại nguy hại từ Nhật Bản, áp dụng thực tiễn tại Việt Nam.</p>
             </div>
             <div class="card venture-card">
                 <i class="fas fa-seedling card-icon"></i>
-                <h3 class="card-title">Nông Nghiệp Tuần Hoàn</h3>
-                <p class="card-text">Ứng dụng vi sinh vật bản địa vào quy trình xử lý phụ phẩm nông nghiệp thành phân bón hữu cơ, phục hồi hệ sinh thái tự nhiên.</p>
+                <h3 class="card-title" data-i18n="ven_card2_title">Nông Nghiệp Tuần Hoàn</h3>
+                <p class="card-text" data-i18n="ven_card2_desc">Ứng dụng vi sinh vật bản địa vào quy trình xử lý phụ phẩm nông nghiệp thành phân bón hữu cơ, phục hồi hệ sinh thái tự nhiên.</p>
             </div>
             <div class="card venture-card">
                 <i class="fas fa-handshake card-icon"></i>
-                <h3 class="card-title">Thương Mại Quốc Tế</h3>
-                <p class="card-text">Xuất nhập khẩu nông sản chất lượng cao, công nghệ y khoa (tế bào gốc), dịch vụ y tế và cung ứng nguồn nhân lực xuất khẩu lao động.</p>
+                <h3 class="card-title" data-i18n="ven_card3_title">Thương Mại Quốc Tế</h3>
+                <p class="card-text" data-i18n="ven_card3_desc">Xuất nhập khẩu nông sản chất lượng cao, công nghệ y khoa (tế bào gốc), dịch vụ y tế và cung ứng nguồn nhân lực xuất khẩu lao động.</p>
             </div>
         </div>
     </section>
@@ -360,51 +367,50 @@
     <section id="expertise" class="section" style="background-color: var(--bg-card); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); overflow: hidden;">
         <div class="container">
             <div class="section-header fade-in">
-                <h2 class="section-title">Năng Lực Cốt Lõi</h2>
+                <h2 class="section-title" data-i18n="exp_title">Năng Lực Cốt Lõi</h2>
             </div>
             
             <div class="marquee-wrapper fade-in">
                 <div class="marquee-track">
                     <div class="marquee-item">
                         <i class="fas fa-balance-scale card-icon"></i>
-                        <h3 class="card-title">Đàm Phán Thương Mại</h3>
-                        <p class="card-text">Áp dụng phương châm WIN-WIN trong đàm phán, đảm bảo lợi ích chiến lược cho cả đối tác Việt Nam và Nhật Bản.</p>
+                        <h3 class="card-title" data-i18n="exp_card1_title">Đàm Phán Thương Mại</h3>
+                        <p class="card-text" data-i18n="exp_card1_desc">Áp dụng phương châm WIN-WIN trong đàm phán, đảm bảo lợi ích chiến lược cho cả đối tác Việt Nam và Nhật Bản.</p>
                     </div>
                     <div class="marquee-item">
                         <i class="fas fa-yin-yang card-icon"></i>
-                        <h3 class="card-title">Giao Thoa Văn Hóa</h3>
-                        <p class="card-text">Am hiểu sâu sắc văn hóa doanh nghiệp và có thâm niên hợp tác với người Nhật từ năm 1993, xóa bỏ mọi rào cản giao tiếp.</p>
+                        <h3 class="card-title" data-i18n="exp_card2_title">Giao Thoa Văn Hóa</h3>
+                        <p class="card-text" data-i18n="exp_card2_desc">Am hiểu sâu sắc văn hóa doanh nghiệp và có thâm niên hợp tác với người Nhật từ năm 1993, xóa bỏ mọi rào cản giao tiếp.</p>
                     </div>
                     <div class="marquee-item">
                         <i class="fas fa-project-diagram card-icon"></i>
-                        <h3 class="card-title">Kết Nối Dự Án</h3>
-                        <p class="card-text">Năng lực tổ chức, kết nối và đàm phán thành công các dự án chuyển giao công nghệ quy mô lớn đa ngành nghề.</p>
+                        <h3 class="card-title" data-i18n="exp_card3_title">Kết Nối Dự Án</h3>
+                        <p class="card-text" data-i18n="exp_card3_desc">Năng lực tổ chức, kết nối và đàm phán thành công các dự án chuyển giao công nghệ quy mô lớn đa ngành nghề.</p>
                     </div>
                     <div class="marquee-item">
                         <i class="fas fa-globe-asia card-icon"></i>
-                        <h3 class="card-title">Mở Rộng Thị Trường</h3>
-                        <p class="card-text">Kinh nghiệm đưa nông sản Việt Nam thâm nhập thị trường Nhật Bản và mang công nghệ Nhật về ứng dụng tại Việt Nam.</p>
+                        <h3 class="card-title" data-i18n="exp_card4_title">Mở Rộng Thị Trường</h3>
+                        <p class="card-text" data-i18n="exp_card4_desc">Kinh nghiệm đưa nông sản Việt Nam thâm nhập thị trường Nhật Bản và mang công nghệ Nhật về ứng dụng tại Việt Nam.</p>
                     </div>
-
                     <div class="marquee-item">
                         <i class="fas fa-balance-scale card-icon"></i>
-                        <h3 class="card-title">Đàm Phán Thương Mại</h3>
-                        <p class="card-text">Áp dụng phương châm WIN-WIN trong đàm phán, đảm bảo lợi ích chiến lược cho cả đối tác Việt Nam và Nhật Bản.</p>
+                        <h3 class="card-title" data-i18n="exp_card1_title_2">Đàm Phán Thương Mại</h3>
+                        <p class="card-text" data-i18n="exp_card1_desc_2">Áp dụng phương châm WIN-WIN trong đàm phán, đảm bảo lợi ích chiến lược cho cả đối tác Việt Nam và Nhật Bản.</p>
                     </div>
                     <div class="marquee-item">
                         <i class="fas fa-yin-yang card-icon"></i>
-                        <h3 class="card-title">Giao Thoa Văn Hóa</h3>
-                        <p class="card-text">Am hiểu sâu sắc văn hóa doanh nghiệp và có thâm niên hợp tác với người Nhật từ năm 1993, xóa bỏ mọi rào cản giao tiếp.</p>
+                        <h3 class="card-title" data-i18n="exp_card2_title_2">Giao Thoa Văn Hóa</h3>
+                        <p class="card-text" data-i18n="exp_card2_desc_2">Am hiểu sâu sắc văn hóa doanh nghiệp và có thâm niên hợp tác với người Nhật từ năm 1993, xóa bỏ mọi rào cản giao tiếp.</p>
                     </div>
                     <div class="marquee-item">
                         <i class="fas fa-project-diagram card-icon"></i>
-                        <h3 class="card-title">Kết Nối Dự Án</h3>
-                        <p class="card-text">Năng lực tổ chức, kết nối và đàm phán thành công các dự án chuyển giao công nghệ quy mô lớn đa ngành nghề.</p>
+                        <h3 class="card-title" data-i18n="exp_card3_title_2">Kết Nối Dự Án</h3>
+                        <p class="card-text" data-i18n="exp_card3_desc_2">Năng lực tổ chức, kết nối và đàm phán thành công các dự án chuyển giao công nghệ quy mô lớn đa ngành nghề.</p>
                     </div>
                     <div class="marquee-item">
                         <i class="fas fa-globe-asia card-icon"></i>
-                        <h3 class="card-title">Mở Rộng Thị Trường</h3>
-                        <p class="card-text">Kinh nghiệm đưa nông sản Việt Nam thâm nhập thị trường Nhật Bản và mang công nghệ Nhật về ứng dụng tại Việt Nam.</p>
+                        <h3 class="card-title" data-i18n="exp_card4_title_2">Mở Rộng Thị Trường</h3>
+                        <p class="card-text" data-i18n="exp_card4_desc_2">Kinh nghiệm đưa nông sản Việt Nam thâm nhập thị trường Nhật Bản và mang công nghệ Nhật về ứng dụng tại Việt Nam.</p>
                     </div>
                 </div>
             </div>
@@ -413,31 +419,31 @@
 
     <section id="timeline" class="section container">
         <div class="section-header gsap-fade">
-            <h2 class="section-title">Hành Trình Phát Triển</h2>
+            <h2 class="section-title" data-i18n="time_title">Hành Trình Phát Triển</h2>
         </div>
         <div class="timeline">
             <div class="timeline-item gsap-fade">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <span class="time-badge">Giai đoạn 3 (3 Năm)</span>
-                    <h3 class="timeline-title">Chuyển Giao Công Nghệ</h3>
-                    <p style="color: var(--text-light); font-size: 0.95rem;">Tiếp nhận và chuyển giao trực tiếp quy trình xử lý nước thải và rác thải nguy hại từ các chuyên gia Nhật Bản về ứng dụng tại Việt Nam.</p>
+                    <span class="time-badge" data-i18n="time_phase3">Giai đoạn 3 (3 Năm)</span>
+                    <h3 class="timeline-title" data-i18n="time_title3">Chuyển Giao Công Nghệ</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem;" data-i18n="time_desc3">Tiếp nhận và chuyển giao trực tiếp quy trình xử lý nước thải và rác thải nguy hại từ các chuyên gia Nhật Bản về ứng dụng tại Việt Nam.</p>
                 </div>
             </div>
             <div class="timeline-item gsap-fade">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <span class="time-badge">Giai đoạn 2 (10 Năm)</span>
-                    <h3 class="timeline-title">Thực Nghiệm Tại Việt Nam</h3>
-                    <p style="color: var(--text-light); font-size: 0.95rem;">Về Việt Nam thực nghiệm các quy trình ứng dụng vi sinh vật bản địa vào xử lý phụ phẩm nông nghiệp thành phân bón hữu cơ.</p>
+                    <span class="time-badge" data-i18n="time_phase2">Giai đoạn 2 (10 Năm)</span>
+                    <h3 class="timeline-title" data-i18n="time_title2">Thực Nghiệm Tại Việt Nam</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem;" data-i18n="time_desc2">Về Việt Nam thực nghiệm các quy trình ứng dụng vi sinh vật bản địa vào xử lý phụ phẩm nông nghiệp thành phân bón hữu cơ.</p>
                 </div>
             </div>
             <div class="timeline-item gsap-fade">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <span class="time-badge">Giai đoạn 1 (3 Năm)</span>
-                    <h3 class="timeline-title">Tu Nghiệp Tại Nhật Bản</h3>
-                    <p style="color: var(--text-light); font-size: 0.95rem;">Học tập và làm việc tại Hiroshima, Nhật Bản. Xây dựng nền tảng tư duy kỷ luật, tác phong làm việc và thiết lập mạng lưới đối tác.</p>
+                    <span class="time-badge" data-i18n="time_phase1">Giai đoạn 1 (3 Năm)</span>
+                    <h3 class="timeline-title" data-i18n="time_title1">Tu Nghiệp Tại Nhật Bản</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem;" data-i18n="time_desc1">Học tập và làm việc tại Hiroshima, Nhật Bản. Xây dựng nền tảng tư duy kỷ luật, tác phong làm việc và thiết lập mạng lưới đối tác.</p>
                 </div>
             </div>
         </div>
@@ -446,12 +452,12 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-logo">Japan-Tech Co., Ltd</div>
-            <p class="footer-text">Kiến tạo giá trị bền vững. Hoàn nguyên môi trường. Cầu nối Việt - Nhật.</p>
+            <p class="footer-text" data-i18n="footer_tag">Kiến tạo giá trị bền vững. Hoàn nguyên môi trường. Cầu nối Việt - Nhật.</p>
             <div style="margin-bottom: 2rem;">
                 <a href="mailto:japantechhcm@gmail.com" style="color: var(--text-heading); text-decoration: none; margin: 0 1rem; transition: color 0.3s;"><i class="fas fa-envelope"></i> japantechhcm@gmail.com</a>
                 <a href="#" style="color: var(--text-heading); text-decoration: none; margin: 0 1rem; transition: color 0.3s;"><i class="fas fa-phone"></i> 0938.090.979</a>
             </div>
-            <p style="font-size: 0.8rem; color: var(--text-light);">&copy; 2026 Đinh Gia Bình. Executive Profile.</p>
+            <p style="font-size: 0.8rem; color: var(--text-light);">&copy; 2026 <span data-i18n="hero_name">Đinh Gia Bình</span>. Executive Profile.</p>
         </div>
     </footer>
 
@@ -459,9 +465,220 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
     <script>
+        // ==========================================
+        // TRANSLATION DICTIONARY
+        // ==========================================
+        const translations = {
+            vi: {
+                nav_logo: "HỒ SƠ DOANH NHÂN",
+                nav_philosophy: "Triết Lý",
+                nav_expertise: "Năng Lực",
+                nav_ventures: "Lĩnh Vực",
+                nav_timeline: "Hành Trình",
+                hero_name: "Đinh Gia Bình",
+                hero_title: "Giám đốc Công ty TNHH Japan-Tech",
+                hero_desc: "Chuyên gia kiến tạo cầu nối chiến lược giữa Việt Nam và Nhật Bản, tiên phong trong lĩnh vực môi trường, xử lý rác thải và nông nghiệp hữu cơ tuần hoàn.",
+                btn_explore: "Khám Phá Hồ Sơ",
+                btn_contact: "Liên Hệ Trực Tiếp",
+                contact_assistant: "Trợ lý",
+                phil_quote: "\"Bằng hai chữ 'HOÀN NGUYÊN', chúng tôi thấy mình có nghĩa vụ PHẢI TRẢ lại cho môi trường: Đất, nước, không khí những giá trị tốt đẹp nhất mà chúng ta đã VAY MƯỢN để sinh tồn trong một thời gian dài.\"",
+                phil_title: "Định Hướng & Kết Nối",
+                phil_desc1: "Mục tiêu chiến lược của Japan-Tech là liên tục cập nhật và kết nối với các Doanh nghiệp Nhật Bản trong lĩnh vực công nghệ cao để tiếp nhận, chuyển giao cho các doanh nghiệp Việt Nam.",
+                phil_desc2: "Đồng thời, chúng tôi tìm kiếm các khách hàng tiềm năng tại Nhật Bản để đưa các mặt hàng nông sản chất lượng cao của Việt Nam vươn tầm quốc tế, duy trì và nâng cao năng lực làm cầu nối vững chắc.",
+                ven_title: "Lĩnh Vực Điều Hành",
+                ven_card1_title: "Xử Lý Môi Trường",
+                ven_card1_desc: "Tiếp nhận và chuyển giao quy trình xử lý nước thải, rác thải công nghiệp và thương mại nguy hại từ Nhật Bản, áp dụng thực tiễn tại Việt Nam.",
+                ven_card2_title: "Nông Nghiệp Tuần Hoàn",
+                ven_card2_desc: "Ứng dụng vi sinh vật bản địa vào quy trình xử lý phụ phẩm nông nghiệp thành phân bón hữu cơ, phục hồi hệ sinh thái tự nhiên.",
+                ven_card3_title: "Thương Mại Quốc Tế",
+                ven_card3_desc: "Xuất nhập khẩu nông sản chất lượng cao, công nghệ y khoa (tế bào gốc), dịch vụ y tế và cung ứng nguồn nhân lực xuất khẩu lao động.",
+                exp_title: "Năng Lực Cốt Lõi",
+                exp_card1_title: "Đàm Phán Thương Mại",
+                exp_card1_desc: "Áp dụng phương châm WIN-WIN trong đàm phán, đảm bảo lợi ích chiến lược cho cả đối tác Việt Nam và Nhật Bản.",
+                exp_card2_title: "Giao Thoa Văn Hóa",
+                exp_card2_desc: "Am hiểu sâu sắc văn hóa doanh nghiệp và có thâm niên hợp tác với người Nhật từ năm 1993, xóa bỏ mọi rào cản giao tiếp.",
+                exp_card3_title: "Kết Nối Dự Án",
+                exp_card3_desc: "Năng lực tổ chức, kết nối và đàm phán thành công các dự án chuyển giao công nghệ quy mô lớn đa ngành nghề.",
+                exp_card4_title: "Mở Rộng Thị Trường",
+                exp_card4_desc: "Kinh nghiệm đưa nông sản Việt Nam thâm nhập thị trường Nhật Bản và mang công nghệ Nhật về ứng dụng tại Việt Nam.",
+                exp_card1_title_2: "Đàm Phán Thương Mại",
+                exp_card1_desc_2: "Áp dụng phương châm WIN-WIN trong đàm phán, đảm bảo lợi ích chiến lược cho cả đối tác Việt Nam và Nhật Bản.",
+                exp_card2_title_2: "Giao Thoa Văn Hóa",
+                exp_card2_desc_2: "Am hiểu sâu sắc văn hóa doanh nghiệp và có thâm niên hợp tác với người Nhật từ năm 1993, xóa bỏ mọi rào cản giao tiếp.",
+                exp_card3_title_2: "Kết Nối Dự Án",
+                exp_card3_desc_2: "Năng lực tổ chức, kết nối và đàm phán thành công các dự án chuyển giao công nghệ quy mô lớn đa ngành nghề.",
+                exp_card4_title_2: "Mở Rộng Thị Trường",
+                exp_card4_desc_2: "Kinh nghiệm đưa nông sản Việt Nam thâm nhập thị trường Nhật Bản và mang công nghệ Nhật về ứng dụng tại Việt Nam.",
+                time_title: "Hành Trình Phát Triển",
+                time_phase3: "Giai đoạn 3 (3 Năm)",
+                time_title3: "Chuyển Giao Công Nghệ",
+                time_desc3: "Tiếp nhận và chuyển giao trực tiếp quy trình xử lý nước thải và rác thải nguy hại từ các chuyên gia Nhật Bản về ứng dụng tại Việt Nam.",
+                time_phase2: "Giai đoạn 2 (10 Năm)",
+                time_title2: "Thực Nghiệm Tại Việt Nam",
+                time_desc2: "Về Việt Nam thực nghiệm các quy trình ứng dụng vi sinh vật bản địa vào xử lý phụ phẩm nông nghiệp thành phân bón hữu cơ.",
+                time_phase1: "Giai đoạn 1 (3 Năm)",
+                time_title1: "Tu Nghiệp Tại Nhật Bản",
+                time_desc1: "Học tập và làm việc tại Hiroshima, Nhật Bản. Xây dựng nền tảng tư duy kỷ luật, tác phong làm việc và thiết lập mạng lưới đối tác.",
+                footer_tag: "Kiến tạo giá trị bền vững. Hoàn nguyên môi trường. Cầu nối Việt - Nhật."
+            },
+            en: {
+                nav_logo: "EXECUTIVE PROFILE",
+                nav_philosophy: "Philosophy",
+                nav_expertise: "Expertise",
+                nav_ventures: "Ventures",
+                nav_timeline: "Journey",
+                hero_name: "Dinh Gia Binh",
+                hero_title: "Director of Japan-Tech Co., Ltd",
+                hero_desc: "Expert in building strategic bridges between Vietnam and Japan, pioneering in environmental treatment, waste management, and circular organic agriculture.",
+                btn_explore: "Explore Profile",
+                btn_contact: "Contact Directly",
+                contact_assistant: "Assistant",
+                phil_quote: "\"Through 'RESTITUTION', we recognize our obligation to GIVE BACK to the environment: The Soil, Water, and Air—the precious values we have 'BORROWED' for survival over a long time.\"",
+                phil_title: "Vision & Connection",
+                phil_desc1: "Japan-Tech's strategic goal is to continuously connect with Japanese High-Tech Enterprises to receive and transfer advanced technology to Vietnamese businesses.",
+                phil_desc2: "Simultaneously, we seek potential Japanese clients to introduce high-quality Vietnamese agricultural products to the international market, maintaining our position as a solid bridge between the two nations.",
+                ven_title: "Current Ventures",
+                ven_card1_title: "Environmental Treatment",
+                ven_card1_desc: "Receiving and transferring advanced wastewater, industrial, and commercial hazardous waste treatment processes from Japan to Vietnam.",
+                ven_card2_title: "Circular Agriculture",
+                ven_card2_desc: "Applying indigenous microorganisms to process agricultural by-products into high-quality organic fertilizers, restoring natural ecosystems.",
+                ven_card3_title: "International Trade",
+                ven_card3_desc: "Import-export of premium agricultural products, advanced medical technology (stem cells), medical services, and human resource supply.",
+                exp_title: "Core Expertise",
+                exp_card1_title: "Commercial Negotiation",
+                exp_card1_desc: "Applying a WIN-WIN philosophy in negotiations, ensuring sustainable strategic benefits for both Vietnamese and Japanese partners.",
+                exp_card2_title: "Cultural Integration",
+                exp_card2_desc: "Deep understanding of Japanese corporate culture with cooperation experience dating back to 1993, eliminating communication barriers.",
+                exp_card3_title: "Project Connection",
+                exp_card3_desc: "Proven ability to organize, connect, and successfully negotiate large-scale, multi-disciplinary technology transfer projects.",
+                exp_card4_title: "Market Expansion",
+                exp_card4_desc: "Extensive experience introducing Vietnamese agricultural products to the Japanese market and bringing Japanese technology to Vietnam.",
+                exp_card1_title_2: "Commercial Negotiation",
+                exp_card1_desc_2: "Applying a WIN-WIN philosophy in negotiations, ensuring sustainable strategic benefits for both Vietnamese and Japanese partners.",
+                exp_card2_title_2: "Cultural Integration",
+                exp_card2_desc_2: "Deep understanding of Japanese corporate culture with cooperation experience dating back to 1993, eliminating communication barriers.",
+                exp_card3_title_2: "Project Connection",
+                exp_card3_desc_2: "Proven ability to organize, connect, and successfully negotiate large-scale, multi-disciplinary technology transfer projects.",
+                exp_card4_title_2: "Market Expansion",
+                exp_card4_desc_2: "Extensive experience introducing Vietnamese agricultural products to the Japanese market and bringing Japanese technology to Vietnam.",
+                time_title: "Professional Journey",
+                time_phase3: "Phase 3 (3 Years)",
+                time_title3: "Technology Transfer",
+                time_desc3: "Directly received and transferred advanced wastewater and hazardous waste treatment processes from Japanese experts for application in Vietnam.",
+                time_phase2: "Phase 2 (10 Years)",
+                time_title2: "Experimentation in Vietnam",
+                time_desc2: "Returned to Vietnam to experiment with applying indigenous microorganisms to convert agricultural by-products into organic fertilizers.",
+                time_phase1: "Phase 1 (3 Years)",
+                time_title1: "Training in Japan",
+                time_desc1: "Lived, studied, and worked in Hiroshima, Japan. Built a foundation of disciplined thinking, professional conduct, and established a partner network.",
+                footer_tag: "Creating sustainable value. Restoring the environment. The Vietnam - Japan Bridge."
+            },
+            ja: {
+                nav_logo: "経営者プロファイル",
+                nav_philosophy: "理念",
+                nav_expertise: "専門性",
+                nav_ventures: "事業領域",
+                nav_timeline: "沿革",
+                hero_name: "ディン・ギア・ビン",
+                hero_title: "Japan-Tech 有限会社 代表取締役",
+                hero_desc: "ベトナムと日本の戦略的な架け橋となる専門家。環境処理、廃棄物処理、循環型有機農業のパイオニア。",
+                btn_explore: "プロフィールを見る",
+                btn_contact: "お問い合わせ",
+                contact_assistant: "アシスタント",
+                phil_quote: "「『還元』という言葉のもと、私たちは長年生きるために『借りて』きた土、水、空気といった最高の価値を環境に『返す』義務があると考えています。」",
+                phil_title: "ビジョンと繋がり",
+                phil_desc1: "Japan-Techの戦略的目標は、ハイテク分野の日本企業と継続的に繋がり、ベトナム企業への技術移転を行うことです。",
+                phil_desc2: "同時に、ベトナムの高品質な農産物を国際市場に届けるため、日本の潜在的な顧客を開拓し、両国間の確固たる架け橋としての役割を維持・向上させます。",
+                ven_title: "事業領域",
+                ven_card1_title: "環境処理",
+                ven_card1_desc: "廃水、産業廃棄物、商業用有害廃棄物の高度な処理プロセスを日本からベトナムへ導入・移転します。",
+                ven_card2_title: "循環型農業",
+                ven_card2_desc: "土着微生物を活用し、農業副産物を高品質な有機肥料に変換し、自然生態系を回復させます。",
+                ven_card3_title: "国際貿易",
+                ven_card3_desc: "高品質な農産物、先進医療技術（幹細胞）、医療サービス、および人材派遣の輸出入を行います。",
+                exp_title: "コアコンピタンス",
+                exp_card1_title: "商業交渉",
+                exp_card1_desc: "交渉においてWIN-WINの理念を適用し、ベトナムと日本のパートナー双方に持続可能な戦略的利益を保証します。",
+                exp_card2_title: "文化融合",
+                exp_card2_desc: "1993年からの協力実績に基づく日本企業文化への深い理解により、コミュニケーションの壁を取り除きます。",
+                exp_card3_title: "プロジェクト連携",
+                exp_card3_desc: "大規模かつ多分野にわたる技術移転プロジェクトを組織し、結びつけ、成功に導く能力を有しています。",
+                exp_card4_title: "市場拡大",
+                exp_card4_desc: "ベトナムの農産物を日本市場に導入し、日本の技術をベトナムに導入する豊富な経験があります。",
+                exp_card1_title_2: "商業交渉",
+                exp_card1_desc_2: "交渉においてWIN-WINの理念を適用し、ベトナムと日本のパートナー双方に持続可能な戦略的利益を保証します。",
+                exp_card2_title_2: "文化融合",
+                exp_card2_desc_2: "1993年からの協力実績に基づく日本企業文化への深い理解により、コミュニケーションの壁を取り除きます。",
+                exp_card3_title_2: "プロジェクト連携",
+                exp_card3_desc_2: "大規模かつ多分野にわたる技術移転プロジェクトを組織し、結びつけ、成功に導く能力を有しています。",
+                exp_card4_title_2: "市場拡大",
+                exp_card4_desc_2: "ベトナムの農産物を日本市場に導入し、日本の技術をベトナムに導入する豊富な経験があります。",
+                time_title: "沿革",
+                time_phase3: "第3フェーズ（3年間）",
+                time_title3: "技術移転",
+                time_desc3: "日本の専門家から高度な廃水および有害廃棄物処理プロセスを直接受け入れ、ベトナムでの応用に向けた移転を行いました。",
+                time_phase2: "第2フェーズ（10年間）",
+                time_title2: "ベトナムでの実証実験",
+                time_desc2: "ベトナムに帰国し、土着微生物を活用して農業副産物を有機肥料に変換する実証実験を実施しました。",
+                time_phase1: "第1フェーズ（3年間）",
+                time_title1: "日本での研修",
+                time_desc1: "日本の広島で生活し、学び、働きました。規律ある思考とプロフェッショナルな行動の基盤を築き、パートナーネットワークを確立しました。",
+                footer_tag: "持続可能な価値の創造。環境の還元。ベトナムと日本の架け橋。"
+            }
+        };
+
         document.addEventListener("DOMContentLoaded", () => {
             
-            // --- 1. THEME TOGGLE LOGIC ---
+            // --- NEW: SLIDER LANGUAGE SELECTOR LOGIC ---
+            const langOptions = document.querySelectorAll('.lang-opt');
+            const langSlider = document.getElementById('lang-slider');
+            
+            let savedLang = localStorage.getItem('language') || 'vi';
+            
+            function setLanguage(lang) {
+                // Change HTML texts
+                const elements = document.querySelectorAll('[data-i18n]');
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        el.innerHTML = translations[lang][key]; 
+                    }
+                });
+                
+                // Update Slider UI
+                langOptions.forEach((btn) => {
+                    if (btn.getAttribute('data-lang') === lang) {
+                        btn.classList.add('active');
+                        // Move slider background to match the active button
+                        langSlider.style.width = `${btn.offsetWidth}px`;
+                        langSlider.style.transform = `translateX(${btn.offsetLeft - 4}px)`; // -4 to account for parent padding
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                
+                localStorage.setItem('language', lang);
+                document.documentElement.lang = lang;
+            }
+
+            // Click event for the language buttons
+            langOptions.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setLanguage(btn.getAttribute('data-lang'));
+                });
+            });
+
+            // Initialize correct position after font loads to ensure accurate offsetWidth
+            setTimeout(() => {
+                setLanguage(savedLang);
+            }, 100);
+
+            window.addEventListener('resize', () => {
+                setLanguage(document.documentElement.lang);
+            });
+
+
+            // --- THEME TOGGLE LOGIC ---
             const themeToggle = document.getElementById('theme-toggle');
             const htmlElement = document.documentElement;
 
@@ -482,7 +699,7 @@
                 themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
             }
 
-            // --- 2. MOBILE MENU LOGIC ---
+            // --- MOBILE MENU LOGIC ---
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const navLinks = document.getElementById('nav-links');
 
@@ -491,7 +708,6 @@
                     navLinks.classList.toggle('active');
                 });
 
-                // Auto-close menu when clicking a link
                 navLinks.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
                         navLinks.classList.remove('active');
@@ -499,7 +715,7 @@
                 });
             }
 
-            // --- 3. SCROLL PROGRESS & NAVBAR SHRINK ---
+            // --- SCROLL PROGRESS & NAVBAR SHRINK ---
             const navbar = document.querySelector('.navbar');
             
             window.addEventListener('scroll', () => {
@@ -517,13 +733,12 @@
                 }
             });
 
-            // --- 4. ADVANCED GSAP CHOREOGRAPHY ---
+            // --- ADVANCED GSAP CHOREOGRAPHY ---
             if (typeof gsap !== 'undefined') {
                 gsap.registerPlugin(ScrollTrigger);
 
-                // A. Initial Page Load
                 const tlLoad = gsap.timeline({ defaults: { ease: "power3.out" } });
-                tlLoad.fromTo(".nav-logo, .nav-links a, .toggle-btn, .mobile-menu-btn", 
+                tlLoad.fromTo(".nav-logo, .nav-links a, .lang-switcher, .toggle-btn, .mobile-menu-btn", 
                     { opacity: 0, y: -15 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }
                 )
                 .fromTo(".hero-text > *", 
@@ -536,13 +751,11 @@
                     { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 1 }, "-=0.8"
                 );
 
-                // B. Hero Parallax
                 gsap.to(".hero-image-wrapper", {
                     yPercent: 15, ease: "none",
                     scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
                 });
 
-                // C. 3D Book Reveal (Disabled on Mobile for better performance)
                 if (window.innerWidth > 768) {
                     gsap.fromTo(".book-left", 
                         { rotationY: 45, opacity: 0, transformOrigin: "right center", scale: 0.8 },
@@ -553,14 +766,12 @@
                         { rotationY: 0, opacity: 1, scale: 1, ease: "power2.out", scrollTrigger: { trigger: ".philosophy-grid", start: "top 85%", end: "center center", scrub: 1 } }
                     );
                 } else {
-                    // Mobile fallback for Book Reveal
                     gsap.from(".book-left, .book-right", {
                         y: 30, opacity: 0, duration: 0.8, stagger: 0.2, ease: "power3.out",
                         scrollTrigger: { trigger: ".philosophy-grid", start: "top 85%", toggleActions: "play none none none" }
                     });
                 }
 
-                // D. Staggered Grid Cards
                 gsap.utils.toArray('.grid-3').forEach(grid => {
                     gsap.fromTo(grid.querySelectorAll('.card'),
                         { opacity: 0, y: 40 },
@@ -568,9 +779,7 @@
                     );
                 });
 
-                // E. Directional Timeline
                 gsap.utils.toArray('.timeline-item').forEach((item, index) => {
-                    // On mobile, everything comes from the bottom. On desktop, alternate left/right.
                     const isMobile = window.innerWidth <= 768;
                     const xOffset = isMobile ? 0 : (index % 2 === 0 ? -40 : 40); 
                     const yOffset = isMobile ? 30 : 20;
@@ -581,12 +790,10 @@
                     );
                 });
 
-                // F. Standard Fades
                 gsap.utils.toArray('.section-header:not(.fade-in)').forEach(header => {
                     gsap.from(header, { scrollTrigger: { trigger: header, start: "top 90%", toggleActions: "play none none none" }, y: 30, opacity: 0, duration: 0.8 });
                 });
                 
-                // G. Marquee Fades
                 gsap.fromTo(".marquee-wrapper.fade-in",
                     { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: ".marquee-wrapper", start: "top 85%", toggleActions: "play none none none" } }
                 );
@@ -595,7 +802,7 @@
                 );
 
             } else {
-                console.warn("GSAP is not loaded. Animations will not play.");
+                console.warn("GSAP is not loaded.");
             }
         });
     </script>
